@@ -1,0 +1,12 @@
+## Interface: 70100
+## Title: AoeEmote by | Cameronmx9|r
+## Version: 0.0.1
+## Notes: Casts AOE emotes
+
+## Author: Cameron Townley
+## X-eMail: cameronmx9@gmail.com
+## X-Credits: My brother - Colton townley
+
+## DefaultState: enabled
+
+AoeEmote.lua
