@@ -10,3 +10,4 @@
 ## DefaultState: enabled
 
 AoeEmote.lua
+Loops.lua
