@@ -29,8 +29,17 @@ local function unlimitedArgsCounter(...)
 	return (a * b) + c + d
 end
 
+local function tableSize( ... )
+	
+	--the only real datastructure in lua is a table
+	local tbl = {...}
+	return #tbl
+end
+
 local returnSimpleCounterValue = simpleCounter(6, 10, 9)
 local returnUnlimitedArgsCounter = unlimitedArgsCounter(6, 10, 9, 1)
+local tableSize = tableSize(1, 2, 3, 4, 5, "hello", "world")
 
 print("counter: " .. returnSimpleCounterValue)
 print("unlimitedArgsCounter: " .. returnUnlimitedArgsCounter)
+print("tableSize: " .. tableSize)
