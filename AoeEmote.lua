@@ -1,109 +1,90 @@
--- nil in lua means null
--- lua does garbage collection itself
+SLASH_RELOADUI1 = "/r1" -- For quicker reloading
+SlashCmdList.RELOADUI = ReloadUI
 
-local function simpleCounter(a, b, c)
-
-	--set default value for a if not passed into the function
-	if (not a) then 
-		a = 0 
-	end
-
-	--set default value for b if not passed into the function
-	if(not b) then b = 0; end
-
-	--set default value for c if not passed into the function
-	if(not c) then c = 0; end
-
-	--build the return
-	local ans = (a * b) + c
-
-	return ans
+SLASH_FRAMESTK1 = "/fs" -- for quicker access to frame stack
+SlashCmdList.FRAMESTK = function()
+	LoadAddOn('Blizzard_DebugTools')
+	FrameStackTooltip_Toggle()
 end
 
--- (...) is a list
-local function unlimitedArgsCounter(...)
 
-	-- first free elements get stored into each value
-	local a, b, c, d = ...;
-
-	return (a * b) + c + d
+-- to be able to use the left and right arrows in the edit box
+-- without rotating your character
+for i = 1, NUM_CHAT_WINDOWS do
+	_G["ChatFrame"..i.."EditBox"]:SetAltArrowKeyMode(false) 
 end
 
-local function tableSize( ... )
-	
-	--the only real datastructure in lua is a table
-	local tbl = {...}
-	return #tbl
-end
+--------------------------------------------------------------
 
--- options table
--- first element as at position #1, not #0 like other languages
-local options = {5, 4, 3, 2, 1}
+--[[
+CreateFrame Arguments:
+1. The type of frame - "Frame"
+2. The global frame name - "AoeEmote"
+3. The Parent frame (NOT a string)
+4. The comma separated List<String> of XML templates to inherit from
+	-- this does not need to be comma separated list though, but
+	-- we are only using one here "BasicFrameTemplateWithInset"
 
--- selecting out of bounds just returns a nil value
-local n = options[1]
+]]
+-- returns a new instance of a frame
+local UIConfig = CreateFrame("Frame", "AoeEmote", UIParent, "BasicFrameTemplateWithInset");
 
---------------------------------------------
--- table is two parts: Array + Hash Table --
---------------------------------------------
+-- set UI size
+UIConfig:SetSize(300, 360);  -- width, height
 
--- stored as a key in the hash table
-options["size"] = 10
+-- set UI position: point, relativeFrame, relativePoint, xOffset, yOffset
+UIConfig:SetPoint("CENTER", UIParent, "LEFT", 150, 0);
 
--- example option table
-local optionsTable = {
-	--array part:
-	1, 2, 3, 4, 5,
+--[[
+ "CENTER could instead have been any of the following"
+ "TOPLEFT"
+ "TOP"
+ "TOPRIGHT"
+ "LEFT"
+ "CENTER"
+ "RIGHT"
+ "BOTTOMlEFT"
 
-	--hash part:
-	["level"] = UnitLevel("player"),
-	["xOffset"] = 10,
-	["yOffset"] = 10,
-	["color"] = {r = 0.5, g = 0.2, b = 0.6, a = 1},
-	class = "Warrior",
-}
+]]
 
--- stack data type
--- local optionsFunctions = {
-	
--- 	push = function (self, arg)
--- 		local n = #self
--- 		self[n + 1] = arg;
--- 	end,
+-- UIConfig is the parent frame for all other child frames and layers
+-- regions we will ad on to it, to make it graphical
 
--- 	pop = function(self)
--- 		local n = #self
--- 		if (n > 0) then
--- 			local return = self[n]
--- 			self[n] = nil
--- 			return rtn
--- 		end
--- 	end,
+-- Child frames and regions:
 
--- }
+UIConfig.title = UIConfig:CreateFontString(nil, "OVERLAY");
+UIConfig.title:SetFontObject("GameFontHighlight");
+UIConfig.title:SetPoint("LEFT", UIConfig.TitleBg, "LEFT", 5, 0);
+UIConfig.title:SetText("Tilter 9000");
 
-local returnSimpleCounterValue = simpleCounter(6, 10, 9)
-local returnUnlimitedArgsCounter = unlimitedArgsCounter(6, 10, 9, 1)
-local tableSize = tableSize(1, 2, 3, 4, 5, "hello", "world")
+-- UI Spit Button:
+UIConfig.spitButton = CreateFrame("Button", nil, UIConfig, "GameMenuButtonTemplate");
+UIConfig.spitButton:SetPoint("CENTER", UIConfig, "TOP", 0, -70);
+UIConfig.spitButton:SetSize(140, 40);
+UIConfig.spitButton:SetText("Spit");
+UIConfig.spitButton:SetNormalFontObject("GameFontNormalLarge");
+UIConfig.spitButton:SetHighlightFontObject("GameFontHighlightLarge");
 
-print("counter: " .. returnSimpleCounterValue)
-print("unlimitedArgsCounter: " .. returnUnlimitedArgsCounter)
-print("tableSize: " .. tableSize)
+-- UI Cringe Button:
+UIConfig.cringeButton = CreateFrame("Button", nil, UIConfig, "GameMenuButtonTemplate");
+UIConfig.cringeButton:SetPoint("CENTER", UIConfig, "TOP", 0, -140);
+UIConfig.cringeButton:SetSize(140, 40);
+UIConfig.cringeButton:SetText("Cringe");
+UIConfig.cringeButton:SetNormalFontObject("GameFontNormalLarge");
+UIConfig.cringeButton:SetHighlightFontObject("GameFontHighlightLarge");
 
-print("-----")
+-- UI Laugh Button:
+UIConfig.laughButton = CreateFrame("Button", nil, UIConfig, "GameMenuButtonTemplate");
+UIConfig.laughButton:SetPoint("CENTER", UIConfig, "TOP", 0, -210);
+UIConfig.laughButton:SetSize(140, 40);
+UIConfig.laughButton:SetText("Laugh");
+UIConfig.laughButton:SetNormalFontObject("GameFontNormalLarge");
+UIConfig.laughButton:SetHighlightFontObject("GameFontHighlightLarge");
 
-print("optionsTable Info: \n")
-print("My Current Level: " ..  optionsTable["level"])
-print("My Class: " .. optionsTable.class)
-print("Table Size: " .. #optionsTable)
-
-print("\n Loop")
-for i = 0, 10, 1 do
-	print(i)
-end
-
-print("\n Reversed Loop")
--- reversed numeric for loop
-for i = 10, 1, -1 do
-	print(i)
-end
+-- UI Fart Button:
+UIConfig.fartButton = CreateFrame("Button", nil, UIConfig, "GameMenuButtonTemplate");
+UIConfig.fartButton:SetPoint("CENTER", UIConfig, "TOP", 0, -280);
+UIConfig.fartButton:SetSize(140, 40);
+UIConfig.fartButton:SetText("Fart");
+UIConfig.fartButton:SetNormalFontObject("GameFontNormalLarge");
+UIConfig.fartButton:SetHighlightFontObject("GameFontHighlightLarge");

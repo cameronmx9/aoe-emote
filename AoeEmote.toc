@@ -8,5 +8,7 @@
 ## X-Credits: My brother - Colton townley
 
 ## DefaultState: enabled
+## SavedVariables: AoeEmote
 
+Templates.xml
 AoeEmote.lua
