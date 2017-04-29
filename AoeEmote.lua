@@ -69,7 +69,6 @@ UIConfig.spitButton:SetScript("OnClick", function()
 end
 )
     
-
 -- UI Cringe Button:
 UIConfig.cringeButton = CreateFrame("Button", nil, UIConfig, "GameMenuButtonTemplate");
 UIConfig.cringeButton:SetPoint("CENTER", UIConfig, "TOP", 0, -140);
@@ -77,7 +76,7 @@ UIConfig.cringeButton:SetSize(140, 40);
 UIConfig.cringeButton:SetText("Cringe");
 UIConfig.cringeButton:SetNormalFontObject("GameFontNormalLarge");
 UIConfig.cringeButton:SetHighlightFontObject("GameFontHighlightLarge");
-UIConfig.spitButton:SetScript("OnClick", function()
+UIConfig.cringeButton:SetScript("OnClick", function()
     SendChatMessage("cringes at you.", "EMOTE", nil, name)
 end
 )
@@ -89,7 +88,7 @@ UIConfig.laughButton:SetSize(140, 40);
 UIConfig.laughButton:SetText("Laugh");
 UIConfig.laughButton:SetNormalFontObject("GameFontNormalLarge");
 UIConfig.laughButton:SetHighlightFontObject("GameFontHighlightLarge");
-UIConfig.spitButton:SetScript("OnClick", function()
+UIConfig.laughButton:SetScript("OnClick", function()
     SendChatMessage("laughs at you.", "EMOTE", nil, name)
 end
 )
@@ -101,7 +100,7 @@ UIConfig.fartButton:SetSize(140, 40);
 UIConfig.fartButton:SetText("Fart");
 UIConfig.fartButton:SetNormalFontObject("GameFontNormalLarge");
 UIConfig.fartButton:SetHighlightFontObject("GameFontHighlightLarge");
-UIConfig.spitButton:SetScript("OnClick", function()
+UIConfig.fartButton:SetScript("OnClick", function()
     SendChatMessage("farts on you.", "EMOTE", nil, name)
 end
 )
